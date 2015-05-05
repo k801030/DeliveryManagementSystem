@@ -1,28 +1,39 @@
 
 dictionary = [{
 	"id": 1,
-	"string": "「I love 球雀」紀念T - 白"
+	"string": "「I love 球雀」紀念T - 白",
+	"type_name": "球雀T-白",
+	"size": true
 },{
 	"id": 2,
-	"string": "「I love 球雀」紀念T - 灰"
+	"string": "「I love 球雀」紀念T - 灰",
+	"type_name": "球雀T-灰",
+	"size": true
 },{
 	"id": 3,
-	"string": "「I  love 松鼠」紀念T - 白"
+	"string": "「I  love 松鼠」紀念T - 白",
+	"type_name": "松鼠T-白",
+	"size": true
 },{
 	"id": 4,
-	"string": "「I  love 松鼠」紀念T - 灰"
+	"string": "「I  love 松鼠」紀念T - 灰",
+	"type_name": "球雀T-灰",
+	"size": true
 },{
 	"id": 5,
-	"string": "「總圖意象」紀念T - "
+	"string": "「總圖意象」紀念T - ",
+	"type_name": "總圖T",
+	"size": true
 },{
 	"id": 6,
-	"string": "「懶洋洋球雀」束口袋 "
+	"string": "「懶洋洋球雀」束口袋 ",
+	"type_name": "束口袋",
+	"size": false
 },
 	]
 
  
-
-entryData = [{
+orderData = [{
 		"type_id": 0,
 		"type_name": "球雀T-白", 
 		"size":[{
@@ -124,9 +135,11 @@ entryData = [{
 	}];
 
 
+
 function StringSpliting(string) {
 	var splitStr = string.split(", ");
-	console.log(splitStr);
+	var orderData = [];
+
 
 	for(var i=0; i<splitStr.length; i++) {
 		// each split string
@@ -140,7 +153,7 @@ function StringSpliting(string) {
 			if((search = splitStr[i].indexOf(dictionary[compare].string) != -1)) {
 				
 				type_id = compare;
-				if(entryData[compare].size != null ) { // has size property
+				if(dictionary[compare].size == true ) { // has size property
 					
 					sub_begin = dictionary[compare].string.length
 					sub_length = splitStr[i].indexOf(" * ") - dictionary[compare].string.length
@@ -149,17 +162,28 @@ function StringSpliting(string) {
 					// hasn't size property
 				}
 				num = splitStr[i].substr(splitStr[i].indexOf(" * ")+3, splitStr[i].length - splitStr[i].indexOf(" * ")+3);
-				console.log("type, size, num: "+ entryData[type_id].type_name +","+ size_id + "," + num);
+				//console.log("type, size, num: "+ orderData[type_id].type_name +","+ size_id + "," + num);
+				
+
+				orderData.push({"type_id": type_id, "size_id": size_id, "num": num });
 
 			}
 			compare--;
 		}
+
 	}
-	console.log("----");
-	return entryData;
+	//console.log("----");
+	return orderData;
 }
 
 
+Array.prototype.mySearch = function(string) {
+	for(var i=0; i<this.length; i++){
+		if(this[i].id == string)
+			return i;
+	}
+	return -1
+}
 
 String.prototype.mySplit = function(option) {
 	var part = [];
