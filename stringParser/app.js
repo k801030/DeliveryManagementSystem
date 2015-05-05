@@ -6,12 +6,20 @@ url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetKey + "/olaesha
 $("#getJSON").click(function(){
 	console.log('getJSON clicked');
 	$.getJSON(url, function(data) {
-			console.log(data)
+
 			var entry = data.feed.entry;
+			$("#raw").html(entry);
 			$(entry).each(function(){
 				var name = this.gsx$聯絡人.$t;
 				var lists = this.gsx$商品清單.$t;
+				
+
+				StringSpliting(lists);
+				
+
 				$("#rawData").append("<tr><td>" + name + "</td><td>" + lists + "</td></tr>");
 			});
 		});
 })
+
+
