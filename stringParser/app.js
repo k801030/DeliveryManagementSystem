@@ -8,17 +8,32 @@ $("#getJSON").click(function(){
 	$.getJSON(url, function(data) {
 
 			var entry = data.feed.entry;
-			$("#raw").html(entry);
+			//$("#raw").html(entry);
+			entries = [];
 			$(entry).each(function(){
 				var name = this.gsx$聯絡人.$t;
+				var phone = this.gsx$聯絡電話.$t;
+				var email = this.gsx$電子郵件.$t;
+				var type = this.gsx$類型.$t;
 				var lists = this.gsx$商品清單.$t;
 				
 
-				StringSpliting(lists);
 				
-
-				$("#rawData").append("<tr><td>" + name + "</td><td>" + lists + "</td></tr>");
+				orderData = StringSpliting(lists);
+				entries.push({
+					"name" : name,
+					"contact":{
+						"phone": phone,
+						"email": email
+					},
+					"type": type,
+					"order": orderData
+				});
+				//$("#rawData").append("<tr><td>" + name + "</td><td>" + lists + "</td><td>" + JSON.stringify(entry) + "</td></tr>");
 			});
+
+			$("#raw").html(JSON.stringify(entries));
+
 		});
 })
 
