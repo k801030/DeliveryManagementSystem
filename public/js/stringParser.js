@@ -27,13 +27,21 @@ $("#getJSON").click(function(){
 						"email": email
 					},
 					"type": type,
-					"order": orderData
+					"order": orderData,
+					"status": null
 				});
 				//$("#rawData").append("<tr><td>" + name + "</td><td>" + lists + "</td><td>" + JSON.stringify(entry) + "</td></tr>");
 			});
 
 			$("#raw").html(JSON.stringify(entries));
-
+			$.ajax({
+	           type: "POST",
+	           url: "/api/save",
+	           contentType: "application/json",
+	           success: function (msg) {
+	           },
+	           data: JSON.stringify(entries)
+	       });
 		});
 })
 

@@ -15,4 +15,9 @@ router.get('/back', function(req, res, next) {
   res.render('back', { title: 'Express' });
 });
 
+
+router.get('/stringParser', function(req, res, next) {
+  res.render('stringParser', { title: 'stringParser' });
+});
+
 module.exports = router;
