@@ -7,11 +7,11 @@
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/js/front.js"></script>
   </head>
-  <body>
+  <body ng-app="front">
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
 
-    <table class="table table-hover table-style">
+    <table class="table table-hover table-style" ng-controller="tableView">
     	<tr>
     		<th>姓名</th>
     		<th>電話</th>
