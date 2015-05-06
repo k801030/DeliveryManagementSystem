@@ -23,7 +23,7 @@ router.post('/save', function(req, res, next) {
 router.get('/order/all', function(req, res, next) {
 
 	order.find().exec(function(err, docs) {
-		res.write(docs);
+		res.write(JSON.stringify(docs)); // only accept string
 		res.end();
 	});
 	

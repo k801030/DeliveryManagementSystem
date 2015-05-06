@@ -3,16 +3,16 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: '2015 Spring' });
 });
 
 
 router.get('/front', function(req, res, next) {
-  res.render('front', { title: 'Express' });
+  res.render('front', { title: 'Front' });
 });
 
 router.get('/back', function(req, res, next) {
-  res.render('back', { title: 'Express' });
+  res.render('back', { title: 'Back' });
 });
 
 

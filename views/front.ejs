@@ -20,7 +20,16 @@
     		<th>備註</th>
     		<th></th>
     	</tr>
-    	    </table>
+        <tr ng-repeat="row in rows">
+            <td>{{ row.name }}</td>
+            <td>{{ row.contact.phone }}</td>
+            <td>{{ row.contact.email }}</td>
+            <td>{{ row.order }}</td>
+            <td>{{ row.type }}</td>
+            <td>{{ row.status }}</td>
+
+        </tr>
+    </table>
     
   </body>
 </html>
