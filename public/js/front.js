@@ -1,11 +1,33 @@
 angular.module('front', [])
 
-.controller('tableView', ["$scope", "$http", function($scope, $http) {
+
+.service('keyValue', function(){
+	type = {
+		"0": "球雀T-白",
+		"1": "球雀T-灰",
+		"2": "松鼠T-白",
+		"3": "松鼠T-灰",
+		"4": "總圖T",
+		"5": "束口袋"
+	};
+	
+	note = {
+		"blink": "",
+		"unpaid": "尚未付款",
+		"award": "FB獲獎人"
+	};
+
+	this.getType = type;
+
+	this.getNote = note;
+})
+.controller('tableView', ["$scope", "$http",  "keyValue", function($scope, $http, keyValue) {
 	$scope.rows;
+	$scope.key = keyValue;
 
 	$http.get('/api/order/all')
 		.success(function(data, status) {
-			console.log(data);
+			//console.log(data);
 			$scope.rows = data;
 		})
 		.error(function(data, status) {

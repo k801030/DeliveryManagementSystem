@@ -24,8 +24,12 @@
             <td>{{ row.name }}</td>
             <td>{{ row.contact.phone }}</td>
             <td>{{ row.contact.email }}</td>
-            <td>{{ row.order }}</td>
-            <td>{{ row.type }}</td>
+            <td>
+                <div ng-repeat="each in row.order">
+                {{ key.getType[each.type_id] }} {{ each.size_id}} {{each.num}}個
+                </div>
+            </td>
+            <td>{{ key.getNote[row.type] }}</td>
             <td>{{ row.status }}</td>
 
         </tr>
