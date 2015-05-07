@@ -24,23 +24,24 @@ angular.module('front', [])
 
 
 .controller('tableView', ["$scope", "$http",  "keyValue", function($scope, $http, keyValue) {
-	$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 	$scope.rows;
 	$scope.key = keyValue;
-
 	$scope.changeStatus = function(row) {
-		console.log(row._id);
+		var dataSent;		
 		if(row.status == null){
 			row.status = 1; // is picking
-			data = {"status": 1}
-			$http.put('/api/order/'+row._id)
+			dataSent = {"status": 1}
+		}else{
+			row.status = null;
+			dataSent = {"status": null}
+		}
+
+		$http.put('/api/order/'+row._id, dataSent)
 				.success(function(data, status) {
 				})
 				.error(function(data, status) {
+					console.log('http put error');
 				});
-		}else{
-			row.status = null;
-		}
 	};
 
 	$http.get('/api/order/all')
