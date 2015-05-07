@@ -4,6 +4,7 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css' />
     <link rel='stylesheet' href='/css/style.css' />
+    <link rel='stylesheet' href='/css/layout.css' />
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/js/front.js"></script>
@@ -11,19 +12,30 @@
   <body ng-app="front">
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <br>
 
-    <table id="front-table" class="table my-table-hover table-style" ng-controller="tableView">
+    <div class="input-group col-md-6">
+      <input type="text" class="form-control" placeholder="搜尋 姓名, 電話, Email" ng-model="filter">
+    </div>
+    <div class="checkbox col-md-3">
+      <label>
+        <input type="checkbox" ng-model="checkStatus">隱藏已領貨者
+      </label>
+    </div>
+    <br>
+
+    <table id="front-table" class="table my-table-hover table-bordered" ng-controller="tableView">
     	<tr>
-        <th>領貨狀態</th>
-    		<th>姓名</th>
-    		<th>電話</th>
-    		<th>Email</th>
-    		<th>商品清單</th>
-    		<th>備註</th>
+        <th class="col-md-1">領貨狀態</th>
+    		<th class="col-md-2">姓名</th>
+    		<th class="col-md-2">電話</th>
+    		<th class="col-md-2">Email</th>
+    		<th class="col-md-2">商品清單</th>
+    		<th class="col-md-1">備註</th>
     	</tr>
-        <tr ng-repeat="row in rows" ng-click="changeStatus(row)" ng-class="{ 'hightlight': row.status!=null }">
-            <td id="status" class="green">
-              <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-show="row.status != null"></span>
+        <tr ng-repeat="row in rows | filter:filter | hideSome:checkStatus" ng-class="{ 'hightlight': row.status!=null }">
+            <td id="status" ng-class="(row.status!=null) ? 'green' : 'gray'" ng-click="changeStatus(row)">
+              <span class="glyphicon glyphicon-ok" aria-hidden="true" ></span>
             </td>
             <td>{{ row.name }}</td>
             <td>{{ row.contact.phone }}</td>

@@ -22,6 +22,20 @@ angular.module('front', [])
 	this.getNote = note;
 })
 
+.filter('hideSome', function() {
+	return function(row, status){
+		var output = [];
+		if(status == true) {
+			for(var i in row){
+				if(row[i].status==null)
+					output.push(row[i]);
+			}
+		}else {
+			output = row;
+		}
+		return output;
+	};
+})
 
 .controller('tableView', ["$scope", "$http",  "keyValue", function($scope, $http, keyValue) {
 	$scope.rows;

@@ -7,7 +7,7 @@ var order = mongoose.model('Order');
 
 /* save to db */
 router.post('/save', function(req, res, next) {
-	/*
+	
  	console.log('save operation');
  	objs = req.body;
  	var instance;
@@ -16,7 +16,7 @@ router.post('/save', function(req, res, next) {
  		instance = new order(objs[i]);
  		instance.save();
  	}
- 	*/
+ 	
  	res.end();
 });
 
