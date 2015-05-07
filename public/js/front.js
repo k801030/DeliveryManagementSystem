@@ -21,15 +21,23 @@ angular.module('front', [])
 
 	this.getNote = note;
 })
+
+
 .controller('tableView', ["$scope", "$http",  "keyValue", function($scope, $http, keyValue) {
+	
 	$scope.rows;
 	$scope.key = keyValue;
 
 	$scope.changeStatus = function(row) {
+		console.log(row._id);
 		if(row.status == null){
-			row.status = "已領貨";
-			$("#status").show("fast");
-			//$("#status").show("fast");
+			row.status = 1; // is picking
+			data = {"status": 1}
+			$http.put('/api/order/'+row._id)
+				.success(function(data, status) {
+				})
+				.error(function(data, status) {
+				});
 		}else{
 			row.status = null;
 		}

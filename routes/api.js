@@ -28,4 +28,22 @@ router.get('/order/all', function(req, res, next) {
 	});
 	
 })
+
+router.put('/order/:id', function(req, res, next) {
+	
+	id = req.param("id");
+	console.log(req.param("id"));
+
+	order.findOne({_id: id}, function(err, doc) {
+		if(err) console.log("order put error");
+
+		doc.status = req.body.status;
+		console.log(req.body);
+		doc.save();
+		res.write(JSON.stringify(req.body));
+		res.end();
+	});
+
+})
+
 module.exports = router;
