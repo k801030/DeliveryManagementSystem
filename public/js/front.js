@@ -24,7 +24,7 @@ angular.module('front', [])
 
 
 .controller('tableView', ["$scope", "$http",  "keyValue", function($scope, $http, keyValue) {
-	
+	$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 	$scope.rows;
 	$scope.key = keyValue;
 
