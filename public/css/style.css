@@ -6,3 +6,20 @@ body {
 a {
   color: #00B7FF;
 }
+
+#front-table {
+  cursor: pointer;
+}
+
+.green {
+  color: #307D7E;
+}
+
+.hightlight {
+	color: #25A0A2;
+}
+
+.my-table-hover tr:hover {
+	background-color: #CAE7E8;
+}
+

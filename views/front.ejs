@@ -2,8 +2,9 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/css/style.css' />
     <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css' />
+    <link rel='stylesheet' href='/css/style.css' />
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/js/front.js"></script>
   </head>
@@ -11,16 +12,19 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
 
-    <table class="table table-hover table-style" ng-controller="tableView">
+    <table id="front-table" class="table my-table-hover table-style" ng-controller="tableView">
     	<tr>
+        <th>領貨狀態</th>
     		<th>姓名</th>
     		<th>電話</th>
     		<th>Email</th>
     		<th>商品清單</th>
     		<th>備註</th>
-    		<th></th>
     	</tr>
-        <tr ng-repeat="row in rows">
+        <tr ng-repeat="row in rows" ng-click="changeStatus(row)" ng-class="{ 'hightlight': row.status!=null }">
+            <td id="status" class="green">
+              <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-show="row.status != null"></span>
+            </td>
             <td>{{ row.name }}</td>
             <td>{{ row.contact.phone }}</td>
             <td>{{ row.contact.email }}</td>
@@ -30,7 +34,7 @@
                 </div>
             </td>
             <td>{{ key.getNote[row.type] }}</td>
-            <td>{{ row.status }}</td>
+
 
         </tr>
     </table>

@@ -25,6 +25,16 @@ angular.module('front', [])
 	$scope.rows;
 	$scope.key = keyValue;
 
+	$scope.changeStatus = function(row) {
+		if(row.status == null){
+			row.status = "已領貨";
+			$("#status").show("fast");
+			//$("#status").show("fast");
+		}else{
+			row.status = null;
+		}
+	};
+
 	$http.get('/api/order/all')
 		.success(function(data, status) {
 			//console.log(data);
@@ -33,5 +43,6 @@ angular.module('front', [])
 		.error(function(data, status) {
 			console.log("error: "+ status);
 		});
+
 
 }])
