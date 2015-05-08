@@ -4,6 +4,17 @@ var bodyParser = require('body-parser')
 var mongoose = require('mongoose');
 var order = mongoose.model('Order');
 
+/* socket.io */
+
+var io = require('socket.io')(1234);
+var socket;
+io.on('connection', function(_socket) {
+	socket = _socket;
+});
+
+function sendOrder(order) {
+	socket.emit('order', order);
+}
 
 /* save to db */
 router.post('/save', function(req, res, next) {
@@ -29,6 +40,17 @@ router.get('/order/all', function(req, res, next) {
 	
 })
 
+router.get('/order/status/:statusCode', function(req, res, next) {
+	status = req.param("statusCode");
+
+	order.find({ $or:[ {'status':1}, {'status':2}]}).exec(function(err, docs) {
+		res.write(JSON.stringify(docs)); // only accept string
+		res.end();
+	});
+	
+})
+
+
 router.put('/order/:id', function(req, res, next) {
 	
 	id = req.param("id");
@@ -42,7 +64,11 @@ router.put('/order/:id', function(req, res, next) {
 		doc.save();
 		res.write(JSON.stringify(req.body));
 		res.end();
+
+		sendOrder(req.body);
 	});
+
+
 
 })
 
