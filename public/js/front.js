@@ -28,7 +28,7 @@ angular.module('front', ['keyValue'])
 
 		dataSent = row;
 
-		$http.put('/api/order/'+row._id, dataSent)
+		$http.put('/api/order/withcounter/'+row._id, dataSent)
 				.success(function(data, status) {
 				})
 				.error(function(data, status) {

@@ -53,6 +53,35 @@ router.get('/order/status/:statusCode', function(req, res, next) {
 })
 
 
+router.put('/order/withcounter/:id', function(req, res, next) {
+	id = req.param("id");
+	console.log(req.param("id"));
+
+	order.findOne({_id: id}, function(err, doc) {
+		if(err) console.log("order put error");
+		doc.status = req.body.status;
+
+		counter.findOne({},function (err, doc_counter) {
+			if(err) console.log(err);
+			if(doc.status == null) { // set back
+				doc.seq = 0; 
+			}else if(doc.status == 1){ // to be ordered
+				doc.seq = doc_counter.seq;
+				doc_counter.seq++;
+				doc_counter.save();
+			}else {  // pick up or not
+
+			}
+			doc.save();
+			res.write(JSON.stringify(req.body));
+			res.end();
+		});
+
+		sendOrder(req.body);
+	});
+
+})
+
 router.put('/order/:id', function(req, res, next) {
 	
 	id = req.param("id");
@@ -62,20 +91,9 @@ router.put('/order/:id', function(req, res, next) {
 	order.findOne({_id: id}, function(err, doc) {
 		if(err) console.log("order put error");
 		doc.status = req.body.status;
-
-		counter.findOne({},function (err, doc_counter) {
-			if(err) console.log(err);
-			if(doc.status == null) 
-				doc.seq = 0; // reset
-			else{
-				doc.seq = doc_counter.seq;
-				doc_counter.seq++;
-				doc_counter.save();
-			}
-			doc.save();
-			res.write(JSON.stringify(req.body));
-			res.end();
-		});
+		doc.save();
+		res.write(JSON.stringify(req.body));
+		res.end();
 
 		sendOrder(req.body);
 	});

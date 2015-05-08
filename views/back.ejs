@@ -13,22 +13,22 @@
 </head>
 <body ng-app="back">
 
+<h1>等待領取</h1>
+
 <table id="back-table" class="table my-table-hover table-bordered" ng-controller="tableView">
 	<tr>
         <th class="col-md-1">領貨狀態</th>
+    		<th class="col-md-2">流水號</th>
     		<th class="col-md-2">姓名</th>
-    		<th class="col-md-2">電話</th>
-    		<th class="col-md-2">Email</th>
     		<th class="col-md-2">商品清單</th>
     		<th class="col-md-1">備註</th>
     	</tr>
-        <tr ng-repeat="row in orders | filter:filter " ng-class="{ 'hightlight': row.status!=null }">
-            <td id="status" ng-class="(row.status!=null) ? 'green' : 'gray'" ng-click="changeStatus(row)">
+        <tr ng-repeat="row in orders | filter:filter | filter: {status:1}  | orderBy:'seq':true" class="hightlight">
+            <td id="status" class="gray" ng-click="changeStatusTo(row,2)">
               <span class="glyphicon glyphicon-ok" aria-hidden="true" ></span>
             </td>
+            <td>{{ row.seq }}</td>
             <td>{{ row.name }}</td>
-            <td>{{ row.contact.phone }}</td>
-            <td>{{ row.contact.email }}</td>
             <td>
                 <div ng-repeat="each in row.order">
                 {{ key.getType[each.type_id] }} {{ each.size_id}} {{each.num}}個
@@ -40,16 +40,18 @@
         </tr>
 </table>
 
+<h1>已領取</h1>
+
 <table id="back-table" class="table my-table-hover table-bordered" ng-controller="tableView">
-	<tr>
+	<tr >
         <th class="col-md-1">領貨狀態</th>
     		<th class="col-md-2">流水號</th>
     		<th class="col-md-2">姓名</th>
     		<th class="col-md-2">商品清單</th>
     		<th class="col-md-1">備註</th>
     	</tr>
-        <tr ng-repeat="row in orders | filter:filter | orderBy:'seq':true" ng-class="{ 'hightlight': row.status!=null }">
-            <td id="status" ng-class="(row.status!=null) ? 'green' : 'gray'" ng-click="changeStatus(row)">
+        <tr class="darkgray" ng-repeat="row in orders | filter:filter | filter: {status:2} | orderBy:'seq':true" >
+            <td id="status" class="gray" ng-click="changeStatusTo(row,1)">
               <span class="glyphicon glyphicon-ok" aria-hidden="true" ></span>
             </td>
             <td>{{ row.seq }}</td>
