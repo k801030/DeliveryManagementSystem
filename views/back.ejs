@@ -40,5 +40,30 @@
         </tr>
 </table>
 
+<table id="back-table" class="table my-table-hover table-bordered" ng-controller="tableView">
+	<tr>
+        <th class="col-md-1">領貨狀態</th>
+    		<th class="col-md-2">流水號</th>
+    		<th class="col-md-2">姓名</th>
+    		<th class="col-md-2">商品清單</th>
+    		<th class="col-md-1">備註</th>
+    	</tr>
+        <tr ng-repeat="row in orders | filter:filter | orderBy:'seq':true" ng-class="{ 'hightlight': row.status!=null }">
+            <td id="status" ng-class="(row.status!=null) ? 'green' : 'gray'" ng-click="changeStatus(row)">
+              <span class="glyphicon glyphicon-ok" aria-hidden="true" ></span>
+            </td>
+            <td>{{ row.seq }}</td>
+            <td>{{ row.name }}</td>
+            <td>
+                <div ng-repeat="each in row.order">
+                {{ key.getType[each.type_id] }} {{ each.size_id}} {{each.num}}個
+                </div>
+            </td>
+            <td>{{ key.getNote[row.type] }}</td>
+
+
+        </tr>
+</table>
+
 </body>
  </html>
