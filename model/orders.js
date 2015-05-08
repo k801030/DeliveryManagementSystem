@@ -11,12 +11,11 @@ var Order = new Schema({
   },
   type    	   : String,
   order        : Array,
-  status       : String
+  status       : String,
+  seq		   : Number
 });
 
 
 mongoose.model('Order', Order);
-console.log("db connected");
-mongoose.connect('mongodb://localhost/pick-up-system')
 
 
