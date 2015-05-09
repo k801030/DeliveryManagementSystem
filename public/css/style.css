@@ -15,7 +15,7 @@ a {
 	color: #25A0A2;
 }
 
-.my-table-hover tr:hover {
+.my-table-hover tr:hover > td {
 	background-color: #D4EDEE;
 }
 
@@ -39,4 +39,29 @@ a {
 
 .darkgray {
 	color: #aaa;
+}
+
+
+.col-1 {
+	width: 6.6%;
+}
+.col-2 {
+	width: 13.2%;
+}
+
+.big-font {
+	font-size: 32px;
+}
+
+.mid-font {
+	font-size: 18px;
+}
+
+img.table-head {
+	//max-height: 180px;
+	max-width: 120px;
+}
+
+.gray-bg {
+	background-color: #eee;
 }

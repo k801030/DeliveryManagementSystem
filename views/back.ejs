@@ -17,24 +17,70 @@
 
 <table id="back-table" class="table my-table-hover table-bordered" ng-controller="tableView">
 	<tr>
-        <th class="col-md-1">領貨狀態</th>
-    		<th class="col-md-2">流水號</th>
-    		<th class="col-md-2">姓名</th>
-    		<th class="col-md-2">商品清單</th>
-    		<th class="col-md-1">備註</th>
-    	</tr>
+    <th class="col-1">領貨狀態</th>
+		<th class="col-1">流水號</th>
+		<th class="col-1">姓名</th>
+		<th class="col-2">
+			{{ key.getType[0] }}<br>
+			<img class="table-head" src="images/bird.jpg">
+		</th>
+		<th class="col-2 gray-bg">
+			{{ key.getType[1] }}<br>
+			<img class="table-head" src="images/bird.jpg">
+		</th>
+		<th class="col-2">
+			{{ key.getType[2] }}<br>
+			<img class="table-head" src="images/squirrel.jpg">
+		</th>
+		<th class="col-2 gray-bg">
+			{{ key.getType[3] }}<br>
+			<img class="table-head" src="images/squirrel.jpg">
+		</th>
+		<th class="col-2">
+			{{ key.getType[4] }}<br>
+			<img class="table-head" src="images/lib.jpg">
+		</th>
+		<th class="col-2">
+			{{ key.getType[5] }}<br>
+			<img class="table-head" src="images/drawstring.jpg">
+		</th>
+	</tr>
         <tr ng-repeat="row in orders | filter:filter | filter: {status:1}  | orderBy:'seq':true" class="hightlight">
             <td id="status" class="gray" ng-click="changeStatusTo(row,2)">
               <span class="glyphicon glyphicon-ok" aria-hidden="true" ></span>
             </td>
             <td>{{ row.seq }}</td>
-            <td>{{ row.name }}</td>
+            <td class="mid-font">{{ row.name }}</td>
             <td>
-                <div ng-repeat="each in row.order">
-                {{ key.getType[each.type_id] }} {{ each.size_id}} {{each.num}}個
+                <div class="big-font" ng-repeat="each in row.order" ng-show="each.type_id==0">
+                {{ each.size_id}}號 × {{each.num}}
                 </div>
             </td>
-            <td>{{ key.getNote[row.type] }}</td>
+            <td class="gray-bg">
+                <div class="big-font" ng-repeat="each in row.order" ng-show="each.type_id==1">
+                {{ each.size_id}}號 × {{each.num}}
+                </div>
+            </td>
+            <td>
+                <div class="big-font" ng-repeat="each in row.order" ng-show="each.type_id==2">
+                {{ each.size_id}}號 × {{each.num}}
+                </div>
+            </td>
+            <td class="gray-bg">
+                <div class="big-font" ng-repeat="each in row.order" ng-show="each.type_id==3">
+                {{ each.size_id}}號 × {{each.num}}
+                </div>
+            </td>
+            <td>
+                <div class="big-font" ng-repeat="each in row.order" ng-show="each.type_id==4">
+                {{ each.size_id}}號 × {{each.num}}
+                </div>
+            </td>
+            <td>
+                <div class="big-font" ng-repeat="each in row.order" ng-show="each.type_id==5">
+                × {{each.num}}
+                </div>
+            </td>
 
 
         </tr>
@@ -43,13 +89,17 @@
 <h1>已領取</h1>
 
 <table id="back-table" class="table my-table-hover table-bordered" ng-controller="tableView">
-	<tr >
-        <th class="col-md-1">領貨狀態</th>
-    		<th class="col-md-2">流水號</th>
-    		<th class="col-md-2">姓名</th>
-    		<th class="col-md-2">商品清單</th>
-    		<th class="col-md-1">備註</th>
-    	</tr>
+	<tr>
+    <th class="col-1">領貨狀態</th>
+		<th class="col-1">流水號</th>
+		<th class="col-1">姓名</th>
+		<th class="col-2">{{ key.getType[0] }}</th>
+		<th class="col-2">{{ key.getType[1] }}</th>
+		<th class="col-2">{{ key.getType[2] }}</th>
+		<th class="col-2">{{ key.getType[3] }}</th>
+		<th class="col-2">{{ key.getType[4] }}</th>
+		<th class="col-2">{{ key.getType[5] }}</th>
+	</tr>
         <tr class="darkgray" ng-repeat="row in orders | filter:filter | filter: {status:2} | orderBy:'seq':true" >
             <td id="status" class="gray" ng-click="changeStatusTo(row,1)">
               <span class="glyphicon glyphicon-ok" aria-hidden="true" ></span>
@@ -57,11 +107,35 @@
             <td>{{ row.seq }}</td>
             <td>{{ row.name }}</td>
             <td>
-                <div ng-repeat="each in row.order">
-                {{ key.getType[each.type_id] }} {{ each.size_id}} {{each.num}}個
+                <div ng-repeat="each in row.order" ng-show="each.type_id==0">
+                {{ each.size_id}} {{each.num}}個
                 </div>
             </td>
-            <td>{{ key.getNote[row.type] }}</td>
+            <td>
+                <div ng-repeat="each in row.order" ng-show="each.type_id==1">
+                {{ each.size_id}} {{each.num}}個
+                </div>
+            </td>
+            <td>
+                <div ng-repeat="each in row.order" ng-show="each.type_id==2">
+                {{ each.size_id}} {{each.num}}個
+                </div>
+            </td>
+            <td>
+                <div ng-repeat="each in row.order" ng-show="each.type_id==3">
+                {{ each.size_id}} {{each.num}}個
+                </div>
+            </td>
+            <td>
+                <div ng-repeat="each in row.order" ng-show="each.type_id==4">
+                {{ each.size_id}} {{each.num}}個
+                </div>
+            </td>
+            <td>
+                <div ng-repeat="each in row.order" ng-show="each.type_id==5">
+                {{ each.size_id}} {{each.num}}個
+                </div>
+            </td>
 
 
         </tr>
