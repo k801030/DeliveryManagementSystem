@@ -45,7 +45,7 @@
 			<img class="table-head" src="images/drawstring.jpg">
 		</th>
 	</tr>
-        <tr ng-repeat="row in orders | filter:filter | filter: {status:1}  | orderBy:'seq':true" class="hightlight">
+        <tr ng-repeat="row in orders | filter:filter | filter: {status:1}  | orderBy:'seq':true" class="darkgray">
             <td id="status" class="gray" ng-click="changeStatusTo(row,2)">
               <span class="glyphicon glyphicon-ok" aria-hidden="true" ></span>
             </td>
@@ -53,32 +53,32 @@
             <td class="mid-font">{{ row.name }}</td>
             <td>
                 <div class="big-font" ng-repeat="each in row.order" ng-show="each.type_id==0">
-                {{ each.size_id}}號 × {{each.num}}
+                {{ each.size_id}}×<span class="hightlight">{{each.num}}</span>
                 </div>
             </td>
             <td class="gray-bg">
                 <div class="big-font" ng-repeat="each in row.order" ng-show="each.type_id==1">
-                {{ each.size_id}}號 × {{each.num}}
+                {{ each.size_id}}×<span class="hightlight">{{each.num}}</span>
                 </div>
             </td>
             <td>
                 <div class="big-font" ng-repeat="each in row.order" ng-show="each.type_id==2">
-                {{ each.size_id}}號 × {{each.num}}
+                {{ each.size_id}}×<span class="hightlight">{{each.num}}</span>
                 </div>
             </td>
             <td class="gray-bg">
                 <div class="big-font" ng-repeat="each in row.order" ng-show="each.type_id==3">
-                {{ each.size_id}}號 × {{each.num}}
+                {{ each.size_id}}×<span class="hightlight">{{each.num}}</span>
                 </div>
             </td>
             <td>
                 <div class="big-font" ng-repeat="each in row.order" ng-show="each.type_id==4">
-                {{ each.size_id}}號 × {{each.num}}
+                {{ each.size_id}}×<span class="hightlight">{{each.num}}</span>
                 </div>
             </td>
             <td>
                 <div class="big-font" ng-repeat="each in row.order" ng-show="each.type_id==5">
-                × {{each.num}}
+                × <span class="hightlight">{{each.num}}</span>
                 </div>
             </td>
 
