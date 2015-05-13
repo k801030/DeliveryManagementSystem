@@ -34,8 +34,8 @@
     		<th class="col-md-2">商品清單</th>
     		<th class="col-md-1">備註</th>
     	</tr>
-        <tr ng-repeat="row in rows | filter:filter | hideSome:checkStatus" ng-class="{ 'hightlight': row.status!=null }">
-            <td id="status" ng-class="(row.status!=null) ? 'green' : 'gray'" ng-click="changeStatus(row)">
+        <tr ng-repeat="row in rows | filter:filter | hideSome:checkStatus" ng-class="{ 'hightlight': row.status>=1 }">
+            <td id="status" ng-class="(row.status>=1) ? 'green' : 'gray'" ng-click="changeStatus(row)">
               <span class="glyphicon glyphicon-ok" aria-hidden="true" ></span>
             </td>
             <td>{{ row.name }}</td>
